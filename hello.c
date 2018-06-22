@@ -1,4 +1,5 @@
 #include <stdio.h>
-main(){
-    FILE *a,*b;    
+main()
+{
+    FILE *a, *b;
 }

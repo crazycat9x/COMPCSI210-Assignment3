@@ -20,8 +20,9 @@ OPS = [
     '(', ')', '{', '}', ';', 'else'
 ]
 SPACED_OPS = ['else']
-UNARY_OPS= ["+", "-", "&", "!", "*"]
+UNARY_OPS = ["+", "-", "&", "!", "*"]
 PREPROCESSOR_TOKEN = '#'
+
 
 def remove_everything_between(subs1, subs2, line):
     regex = re.compile(subs1 + r'.*' + subs2)
@@ -51,7 +52,8 @@ def remove_multiline_comments(lines):
                 end_pos = line.find(end)
                 # inline multiline comment
                 if start_pos < end_pos:
-                    line = remove_everything_between(escaped_start, escaped_end, line)
+                    line = remove_everything_between(
+                        escaped_start, escaped_end, line)
                     in_comment = False
                 else:
                     line = remove_everything_past(escaped_start, line)
@@ -136,7 +138,7 @@ def reinsert_preprocessor_newlines(lines):
     So bring back a '\n' on lines beginning with '#' AND on lines before them"""
     for idx, line in enumerate(lines):
         if is_preprocessor_directive(line) or (
-         idx != len(lines)-1 and is_preprocessor_directive(lines[idx+1])):
+                idx != len(lines)-1 and is_preprocessor_directive(lines[idx+1])):
             lines[idx] = lines[idx] + '\n'
     return lines
 
